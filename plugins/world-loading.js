@@ -74,7 +74,6 @@ export default class WorldLoadingPlugin {
         err = {code: 404, message: `Cannot find thumbnail for ${url.split("/").slice(2).join("/")}`};
       } else {
         name = decodeURIComponent(name);
-        
         {
           // FIXME, support multiple DBs
           // FIXME, move somewhere else
@@ -82,7 +81,7 @@ export default class WorldLoadingPlugin {
             let db = await ObjectDB.find("lively.morphic/objectdb/morphicdb"),
                 previewLoc = db.snapshotLocation.join(`../preview-cache/by-name/${type}/`).withRelativePartsResolved(),
                 defaultImageFile = previewLoc.join(`${name}.png`).beBinary();
-            
+
             // exists and is recent?
             if (await defaultImageFile.exists()) {
               if (Date.now() - (await defaultImageFile.readProperties()).lastModified < minute*10) {
