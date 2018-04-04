@@ -146,11 +146,9 @@ export default class WorldLoadingPlugin {
 
       res.setHeader('content-type', 'text/html');
       res.end(html);
-
     } else {
       next();
     }
-
   }
 
 }
